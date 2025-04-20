@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="queens:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="784fd869-a998-49e2-ac39-38806b519e24" name="Changes" comment="restructure:&#10;remove model, controller from view">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/queens_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ChessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ChessController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ChessBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/SolutionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/SolutionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/SolutionTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/SolutionTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ChessView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,14 +30,14 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="$MAVEN_REPOSITORY$" />
-        <option name="mavenHome" value="$PROJECT_DIR$/../../../../../program/maven" />
-        <option name="userSettingsFile" value="$PROJECT_DIR$/../../../../../program/maven/conf/settings.xml" />
+        <option name="mavenHome" value="$USER_HOME$/program/maven" />
+        <option name="userSettingsFile" value="$USER_HOME$/program/maven/conf/settings.xml" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -58,17 +62,19 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/sagwa/Workspace/neu/5004/final-code/queens",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "build.tools",
+    "settings.editor.selected.configurable": "project.propCompiler",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -188,6 +194,7 @@
       <workItem from="1744503443477" duration="2633000" />
       <workItem from="1744611144133" duration="126000" />
       <workItem from="1744611278187" duration="23181000" />
+      <workItem from="1745133457038" duration="855000" />
     </task>
     <task id="LOCAL-00001" summary="restructure:&#10;remove model, controller from view">
       <option name="closed" value="true" />
@@ -242,6 +249,10 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/queens$Main.ic" NAME="Main Coverage Results" MODIFIED="1744610927443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
