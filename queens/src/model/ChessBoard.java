@@ -7,6 +7,7 @@
 
 package model;
 
+import java.util.Arrays;
 import java.util.function.BiPredicate;
 import java.util.stream.IntStream;
 
@@ -103,17 +104,16 @@ public class ChessBoard implements BoardModel {
     @Override
     public boolean isSolved() {
         // Use streams to check if the board is a valid solution
-        record Position(int row, int col) {}
-        int queenCount = IntStream.range(0, size)
-                // Generate all board positions
-                .boxed()
-                .flatMap(row -> IntStream.range(0, size).mapToObj(col -> new Position(row, col)))
-                // Filter: Keep positions with queens
-                .filter(pos -> board[pos.row][pos.col])
-                // Map: Count queens and check safety
-                .mapToInt(pos -> isSafePredicate.test(pos.row, pos.col) ? 1 : 0)
-                // Fold (reduce): Sum valid queens
-                .sum();
+        long queenCount = Arrays.stream(board)
+                .filter(row -> {
+                    boolean hasQueen = false;
+                    for (boolean e : row) {
+                        if (e) {
+                            hasQueen = true;
+                        }
+                    }
+                    return hasQueen;
+                }).count();
 
         return queenCount == size;
     }
