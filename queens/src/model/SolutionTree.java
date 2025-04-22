@@ -68,9 +68,9 @@ public class SolutionTree {
 
         return true;
     }
-    // fix : using high order function
+
     public int[] findNextMove(boolean[][] currentBoard) {
-        // Find the target row that needs a queen
+        // Find the first row without a queen
         int targetRow = -1;
         for (int row = 0; row < size; row++) {
             boolean hasQueen = false;
@@ -90,39 +90,63 @@ public class SolutionTree {
             return null; // All rows have queens
         }
 
-        // Use streams to find the next valid move
-        int finalTargetRow = targetRow;
-        return solutions.stream()
-                // Map: Transform each solution to its path
-                .map(SolutionNode::getPath)
-                // Filter: Keep solutions that match the current board state up to targetRow
-                .filter(path -> {
-                    for (int row = 0; row < finalTargetRow; row++) {
-                        boolean foundMatch = false;
-                        int finalRow = row;
-                        for (int col = 0; col < size; col++) {
-                            if (currentBoard[row][col]) {
-                                // Check if this position is in the path
-                                int finalCol = col;
-                                boolean inPath = path.stream()
-                                        .anyMatch(pos -> pos[0] == finalRow && pos[1] == finalCol);
-                                if (!inPath) {
-                                    return false;
-                                }
-                                foundMatch = true;
-                                break;
-                            }
-                        }
-                        if (!foundMatch && path.stream().anyMatch(pos -> pos[0] == finalRow)) {
-                            return false;
+        // Check each solution for a matching path
+        for (SolutionNode solution : solutions) {
+            List<int[]> path = solution.getPath();
+            boolean isValidPath = true;
+
+            // Check if the path matches the board state for rows 0 to targetRow-1
+            for (int row = 0; row < targetRow; row++) {
+                boolean queenInRow = false;
+                int boardCol = -1;
+
+                // Find if the board has a queen in this row
+                for (int col = 0; col < size; col++) {
+                    if (currentBoard[row][col]) {
+                        queenInRow = true;
+                        boardCol = col;
+                        break;
+                    }
+                }
+
+                // If the board has a queen, check if it’s in the path
+                if (queenInRow) {
+                    boolean foundInPath = false;
+                    for (int[] pos : path) {
+                        if (pos[0] == row && pos[1] == boardCol) {
+                            foundInPath = true;
+                            break;
                         }
                     }
-                    return true;
-                })
-                // Map: Extract the position for the target row
-                .flatMap(path -> path.stream().filter(pos -> pos[0] == finalTargetRow))
-                // Fold (reduce): Take the first valid move
-                .findFirst()
-                .orElse(null);
+                    if (!foundInPath) {
+                        isValidPath = false;
+                        break;
+                    }
+                } else {
+                    // If no queen in the board row, ensure no queen in the path for this row
+                    for (int[] pos : path) {
+                        if (pos[0] == row) {
+                            isValidPath = false;
+                            break;
+                        }
+                    }
+                    if (!isValidPath) {
+                        break;
+                    }
+                }
+            }
+
+            // If the path matches, return the position for targetRow
+            if (isValidPath) {
+                for (int[] pos : path) {
+                    if (pos[0] == targetRow) {
+                        return pos;
+                    }
+                }
+            }
+        }
+
+        return null; // No valid move found
     }
-} 
+
+}

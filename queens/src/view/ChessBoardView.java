@@ -221,7 +221,7 @@ public class ChessBoardView extends JFrame implements ChessView {
         }
     }
 
-    // 实现事件监听器注册方法
+    // event register
     @Override
     public void addCellClickListener(CellClickListener listener) {
         cellClickListeners.add(listener);

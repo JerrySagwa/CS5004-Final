@@ -8,7 +8,7 @@
 package model;
 
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 /**
  * model : all data of the chessboard
@@ -20,6 +20,8 @@ public class ChessBoard implements BoardModel {
     private boolean[][] threatenedSquares;
     private boolean showHelp;
     private SolutionTree solutionTree;
+    private final BiPredicate<Integer, Integer> isSafePredicate;
+
 
 
     public ChessBoard() {
@@ -33,6 +35,21 @@ public class ChessBoard implements BoardModel {
         this.showHelp = false;
         this.solutionTree = new SolutionTree(size);
         this.solutionTree.buildTree(new boolean[size][size]);
+        this.isSafePredicate = (row, col) -> {
+            // Check column
+            for (int i = 0; i < row; i++) {
+                if (board[i][col]) return false;
+            }
+            // Check upper diagonal (left)
+            for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+                if (board[i][j]) return false;
+            }
+            // Check upper diagonal (right)
+            for (int i = row, j = col; i >= 0 && j < size; i--, j++) {
+                if (board[i][j]) return false;
+            }
+            return true;
+        };
     }
 
     @Override
@@ -44,35 +61,6 @@ public class ChessBoard implements BoardModel {
     public void toggleHelp() {
         this.showHelp = !this.showHelp;
     }
-
-    private final BiPredicate<Integer, Integer> isSafePredicate = (row, col) -> {
-        // Check row
-        for (int i = 0; i < size; i++) {
-            if (i != col && board[row][i]) return false;
-        }
-
-        // Check column
-        for (int i = 0; i < size; i++) {
-            if (i != row && board[i][col]) return false;
-        }
-
-        // Check diagonals (4 directional)
-        Predicate<int[]> checkDiagonal = (int[] coords) -> {
-            int i = coords[0] + coords[2], j = coords[1] + coords[3];
-            while (i >= 0 && j >= 0 && i < size && j < size) {
-                if (board[i][j]) return false;
-                i += coords[2];
-                j += coords[3];
-            }
-            return true;
-        };
-
-        // Check all four diagonals
-        return checkDiagonal.test(new int[]{row, col, -1, -1}) &&  // upper left
-               checkDiagonal.test(new int[]{row, col, -1, 1}) &&   // upper right
-               checkDiagonal.test(new int[]{row, col, 1, -1}) &&   // lower left
-               checkDiagonal.test(new int[]{row, col, 1, 1});      // lower right
-    };
 
     @Override
     public int getSize() {
@@ -114,14 +102,19 @@ public class ChessBoard implements BoardModel {
 
     @Override
     public boolean isSolved() {
-        int queenCount = 0;
-        for (boolean[] row : board){
-            for (boolean e : row) {
-                if (e) {
-                    queenCount++;
-                }
-            }
-        }
+        // Use streams to check if the board is a valid solution
+        record Position(int row, int col) {}
+        int queenCount = IntStream.range(0, size)
+                // Generate all board positions
+                .boxed()
+                .flatMap(row -> IntStream.range(0, size).mapToObj(col -> new Position(row, col)))
+                // Filter: Keep positions with queens
+                .filter(pos -> board[pos.row][pos.col])
+                // Map: Count queens and check safety
+                .mapToInt(pos -> isSafePredicate.test(pos.row, pos.col) ? 1 : 0)
+                // Fold (reduce): Sum valid queens
+                .sum();
+
         return queenCount == size;
     }
 
@@ -151,17 +144,16 @@ public class ChessBoard implements BoardModel {
     private void updateThreatenedSquares() {
         threatenedSquares = new boolean[size][size];
         
-        // 检查每一行和每一列
+        // mark each row and col
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (board[i][j]) {
-                    // 标记行和列
                     for (int k = 0; k < size; k++) {
                         threatenedSquares[i][k] = true;
                         threatenedSquares[k][j] = true;
                     }
                     
-                    // 标记对角线
+                    // mark diagonal
                     markDiagonal(i, j, -1, -1); // 左上
                     markDiagonal(i, j, -1, 1);  // 右上
                     markDiagonal(i, j, 1, -1);  // 左下

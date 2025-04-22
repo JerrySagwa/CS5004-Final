@@ -10,11 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="784fd869-a998-49e2-ac39-38806b519e24" name="Changes" comment="restructure:&#10;remove model, controller from view">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/queens_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ChessBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/SolutionTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/SolutionTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChessBoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessBoardView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +193,7 @@
       <workItem from="1744503443477" duration="2633000" />
       <workItem from="1744611144133" duration="126000" />
       <workItem from="1744611278187" duration="23181000" />
-      <workItem from="1745133457038" duration="855000" />
+      <workItem from="1745133457038" duration="9661000" />
     </task>
     <task id="LOCAL-00001" summary="restructure:&#10;remove model, controller from view">
       <option name="closed" value="true" />
@@ -237,15 +236,6 @@
           <url>file://$PROJECT_DIR$/src/test/ChessControllerTest.java</url>
           <line>77</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/model/ChessBoard.java</url>
-          <line>115</line>
-          <properties class="model.ChessBoard" method="isSolved">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
